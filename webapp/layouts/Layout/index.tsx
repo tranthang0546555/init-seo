@@ -4,9 +4,17 @@ import { MantineProvider, createTheme } from '@mantine/core'
 import '@mantine/core/styles.css'
 import { NextFont } from 'next/dist/compiled/@next/font'
 import { Footer, Header } from '../index'
+import styles from './index.module.css'
 
 const theme = createTheme({
   /** Put your mantine theme override here */
+  breakpoints: {
+    xs: '30em',
+    sm: '48em',
+    md: '64em',
+    lg: '74em',
+    xl: '90em',
+  },
 })
 
 type LayoutProps = {
@@ -26,9 +34,11 @@ const Layout = (props: LayoutProps) => {
           forceColorScheme={mode == 'dark' ? 'dark' : 'light'}
           defaultColorScheme={mode}
         >
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <div className={styles.root}>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </div>
         </MantineProvider>
       </body>
     </html>

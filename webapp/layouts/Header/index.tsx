@@ -1,18 +1,13 @@
 import { useLaunchStore } from '@/stores'
 import {
   ActionIcon,
-  Anchor,
   Box,
   Burger,
   Button,
-  Center,
-  Collapse,
   Divider,
   Drawer,
   Group,
-  HoverCard,
   ScrollArea,
-  SimpleGrid,
   Text,
   ThemeIcon,
   UnstyledButton,
@@ -24,7 +19,6 @@ import { MantineLogo } from '@mantinex/mantine-logo'
 import {
   IconBook,
   IconChartPie3,
-  IconChevronDown,
   IconCode,
   IconCoin,
   IconFingerprint,
@@ -34,6 +28,7 @@ import {
 } from '@tabler/icons-react'
 import Link from 'next/link'
 import classes from './index.module.css'
+import { useRouter } from 'next/navigation'
 
 const mockdata = [
   {
@@ -69,6 +64,7 @@ const mockdata = [
 ]
 
 export function Header() {
+  const router = useRouter()
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false)
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false)
@@ -95,6 +91,10 @@ export function Header() {
       </Group>
     </UnstyledButton>
   ))
+
+  const navigateToAuthPage = () => {
+    router.push('/auth')
+  }
 
   return (
     <Box>
@@ -156,16 +156,21 @@ export function Header() {
                 </div>
               </HoverCard.Dropdown>
             </HoverCard> */}
-            <a href="#" className={classes.link}>
-              Learn
-            </a>
-            <a href="#" className={classes.link}>
-              Academy
-            </a>
+            <Link href="/link" className={classes.link}>
+              Link
+            </Link>
+            <Link href="/404" className={classes.link}>
+              404
+            </Link>
+            <Link href="/about" className={classes.link}>
+              About
+            </Link>
           </Group>
 
           <Group visibleFrom="sm">
-            <Button variant="default">Log in</Button>
+            <Button variant="default" onClick={navigateToAuthPage}>
+              Log in
+            </Button>
             <Button>Sign up</Button>
             <ActionIcon
               size={42}
@@ -230,7 +235,9 @@ export function Header() {
           <Divider my="sm" />
 
           <Group justify="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
+            <Button variant="default" onClick={navigateToAuthPage}>
+              Log in
+            </Button>
             <Button>Sign up</Button>
           </Group>
         </ScrollArea>
